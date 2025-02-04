@@ -14,31 +14,26 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
+char auth[] = BLYNK_AUTH_TOKEN;
+char ssid[] = "telecomPUCP"; //Escribe el nombre de tu red WiFi
+char pass[] = "telecom25"; //Escribe la contraseña de tu red WiFi
 
 const int redled = 14;//D5
 const int greenled = 12;//D6
 const int blueled = 13;//D7
 
-
-char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "ASUS"; //your hotspot name
-char pass[] = "111sssaaa"; //your hotspot password name
-
-
-
 void setup()
 {
  Serial.begin(9600);
-
-  pinMode(D5, OUTPUT);
-  pinMode(D6, OUTPUT);
-  pinMode(D7, OUTPUT);
-
+ 
  delay(100);
  Blynk.begin(auth, ssid, pass);
- //Blynk.virtualWrite(V1, 35, 250, 200);
+ 
+ pinMode(D5, OUTPUT);
+ pinMode(D6, OUTPUT);
+ pinMode(D7, OUTPUT);
+ 
 }
-
 
 // Uso de un pin virtual
 // IMPORTANTE: esta fuera del loop
@@ -49,37 +44,23 @@ BLYNK_WRITE(V1)
   int r = param[0].asInt(); // Se define que este dato es un entero
   int g = param[1].asInt();
   int b = param[2].asInt();
-  Serial.print("V1: r = ");
-  Serial.print(r);
-  Serial.print("\t g=");
-  Serial.print(g);
-  Serial.print("\t b=");
-  Serial.println(b);
 
 // para zeRGBa se debe escalar valores de 0 - 255 (8bits) a 0 -1023 (valor analógico)
 //  long factor = 1023.0/255.0;
-  r = map(r, 0, 255, 762, 1023);
+  r = map(r, 0, 255, 762, 1023); //rango para visualizar con zeRGBa
   g = map(g, 0, 255, 762, 1023);
   b = map(b, 0, 255, 762, 1023);
   
-
   // Al ser un LED con ánodo común, se tienen que invertir los valores
   r = 1023 - r;
   g = 1023 - g;
   b = 1023 - b;
-  Serial.print("FINAL: r = ");
-  Serial.print(r);
-  Serial.print("\t g=");
-  Serial.print(g);
-  Serial.print("\t b=");
-  Serial.println(b);
 
   // Estos valores se escriben en los pines indicados
   analogWrite(D5 ,r);
   analogWrite(D6, g);
   analogWrite(D7, b);
 }
-
 
 void loop() {
   Blynk.run();
