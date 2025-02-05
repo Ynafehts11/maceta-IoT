@@ -5,9 +5,9 @@
  * Actividad: Detectar y monitorear la humedad de la planta en una maceta
  */
 
-#define BLYNK_TEMPLATE_ID "TMPL2hOPxH8Eb"
-#define BLYNK_TEMPLATE_NAME "Maceta IoT"
-#define BLYNK_AUTH_TOKEN "xicoQ_kAHEFRFVGy3XIh7AZMPeu-8wBZ"
+#define BLYNK_TEMPLATE_ID "TMPL2hOPxH8Eb" // CAMBIAR EL ID QUE SE COPIA DE BLYNK
+#define BLYNK_TEMPLATE_NAME "Maceta IoT" // CAMBIAR EL NOMBRE QUE SE COPIA DE BLYNK
+#define BLYNK_AUTH_TOKEN "xicoQ_kAHEFRFVGy3XIh7AZMPeu-8wBZ" //CAMBIAR POR TOKEN DE BLYNK
 
 #define BLYNK_PRINT Serial
 
